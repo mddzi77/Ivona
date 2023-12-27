@@ -26,14 +26,14 @@ class MyGridLayout(GridLayout):
         text_layout.add_widget(self.text_input)
 
         # Drop Load File
-        file_chooser = FileChooserListView( height=100)
+        file_chooser = FileChooserListView( height=100) #ten file chooser to do wyjebania, cos innego
         file_chooser.bind(on_dropfile=self.on_file_drop)
 
         # Add Widgets to the Grid
         self.add_widget(button_layout)
         self.add_widget(text_layout)
-        #self.add_widget(file_chooser)
+        #self.add_widget(file_chooser) jakis inny widget na drop file to load (?)
 
-    def on_file_drop(self, instance, x, y, filepath):
+    def on_file_drop(self, filepath):
         # Handling Dropped File                         //Wez tu wjeb te walki z pdf itd. najlepiej w osobnym pliku .py zeby nie nasrac tu
         print(f'Dropped file boys: {filepath}')
