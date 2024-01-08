@@ -1,0 +1,37 @@
+<MyGridLayout>:
+    cols: 2
+
+    # BoxLayout for Buttons - LEFT
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 90
+        padding: 15
+
+        Label:
+            text: 'Ivona'
+            font_size: 35
+
+        Button:
+            text: 'New Profile'
+            size_hint_y: None
+            height: 50
+
+        Button:
+            text: 'Profile'
+            size_hint_y: None
+            height: 50
+
+        Button:
+            text: 'Exit'
+            size_hint_y: None
+            height: 50
+
+    # BoxLayout for Text Panel - RIGHT
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 15
+        padding: 15
+
+        TextInput:
+            id: text_input
+            multiline: True
