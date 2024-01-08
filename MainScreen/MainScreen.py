@@ -3,8 +3,7 @@ from kivy.core.window import Window
 from kivy.lang import Builder
 from .FileRead import handle_dropfile
 
-Builder.load_file(
-    'MainScreen/MainScreenLayout.kv')  # ogolnie to .kv dziala, ale mam problem z implementowaniem tego on_dropfile, nwm jak to zrobic :/
+Builder.load_file('MainScreen/MainScreenLayout.kv')
 
 
 class MyGridLayout(GridLayout):
@@ -37,6 +36,6 @@ class MyGridLayout(GridLayout):
         self.add_widget(text_layout)
         '''
 
-        # Drag & Drop File Handler - return text to textinput.text
+        # Drag & Drop File Handler
         Window.bind(on_dropfile=lambda window, file_path: handle_dropfile(window, file_path, self.ids.text_input))  # tu bez kivy self.text_input
         # tak samo pozniej zbieranie textu i wszystkiego z kivy przez ID
