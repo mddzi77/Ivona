@@ -13,18 +13,26 @@
 
         Button:
             text: 'New Profile'
+            id: new_profile
             size_hint_y: None
             height: 50
+            on_press: print("Elo")
+
 
         Button:
             text: 'Profile'
+            id: profile
             size_hint_y: None
             height: 50
+            on_press: print("Profile")
 
         Button:
             text: 'Exit'
+            id: exit
             size_hint_y: None
             height: 50
+            on_press: quit()
+
 
     # BoxLayout for Text Panel - RIGHT
     BoxLayout:
