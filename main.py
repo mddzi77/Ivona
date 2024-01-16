@@ -1,4 +1,4 @@
-from Screens.MainScreen.MainScreen import MyGridLayout
+from Screens.MainScreen.MainScreen import MainScreen
 from Screens.NewProfileScreen.NewProfileScreen import NewProfileGridLayout
 from Screens.ProfileScreen.ProfileScreen import ProfileGridLayout
 from kivy.lang import Builder
@@ -19,7 +19,7 @@ class MyApp(App):
     title = 'Basic Application'
 
     def build(self):
-        return MyGridLayout()
+        return MainScreen()
 
     # def show(self, widget):
 

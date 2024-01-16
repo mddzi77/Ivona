@@ -9,7 +9,7 @@ import pandas as pd
 Builder.load_file('Screens/MainScreen/MainScreenLayout.kv')
 # Window.size = (1000, 100)
 
-class MyGridLayout(GridLayout):
+class MainScreen(GridLayout):
     # def __init__(self, **kwargs):
         # super(MyGridLayout, self).__init__(**kwargs)
 
