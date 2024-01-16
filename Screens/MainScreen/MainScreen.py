@@ -7,7 +7,7 @@ from kivy.properties import ObjectProperty
 import pandas as pd
 
 Builder.load_file('Screens/MainScreen/MainScreenLayout.kv')
-
+# Window.size = (1000, 100)
 
 class MyGridLayout(GridLayout):
     # def __init__(self, **kwargs):
@@ -40,18 +40,13 @@ class MyGridLayout(GridLayout):
         self.add_widget(button_layout)
         self.add_widget(text_layout)
         '''
-        def press_new_profile(self):
+        def open_new_profile(self, button):
             print("New Profile")
 
-            # text_input = TextInput(text=self.my_button.text, multiline=False)
-            # text_input.bind(on_text_validate=self.on_text_validate)
-            #
-            # self.layout.remove_widget(self.my_button)
-            # self.layout.add_widget(text_input)
 
 
         # Drag & Drop File Handler
-        Window.bind(on_dropfile=lambda window, file_path: handle_dropfile(window, file_path, self.ids.text_input))  # tu bez kivy self.text_input
+        Window.bind(on_dropfile=lambda window, file_path: handle_dropfile(window, file_path))  # tu bez kivy self.text_input
         # tak samo pozniej zbieranie textu i wszystkiego z kivy przez ID
 
 

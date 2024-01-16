@@ -1,6 +1,13 @@
 from Screens.MainScreen.MainScreen import MyGridLayout
+from Screens.NewProfileScreen.NewProfileScreen import NewProfileGridLayout
+from Screens.ProfileScreen.ProfileScreen import ProfileGridLayout
+from kivy.lang import Builder
 from kivy.app import App
 from kivy.config import Config
+
+Builder.load_file('Screens/MainScreen/MainScreenLayout.kv')
+Builder.load_file('Screens/ProfileScreen/ProfileScreenLayout.kv')
+Builder.load_file('Screens/NewProfileScreen/NewProfileScreenLayout.kv')
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 Config.set('graphics', 'Width', '800')
