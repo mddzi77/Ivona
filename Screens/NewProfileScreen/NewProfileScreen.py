@@ -1,17 +1,11 @@
-from kivy.uix.widget import Widget
-from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
-from kivy.uix.label import Label
-from kivy.core.window import Window
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ListProperty
-from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.scrollview import ScrollView
 
 Builder.load_file('Screens/NewProfileScreen/NewProfileScreenLayout.kv')
-# Window.size = (300, 500)
 
 
 class NewProfileGridLayout(Screen):
