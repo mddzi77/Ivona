@@ -7,7 +7,7 @@ from kivy.core.window import Window
 from kivy.uix.screenmanager import Screen
 
 Builder.load_file('Screens/ProfileScreen/ProfileScreenLayout.kv')
-# Window.size = (300, 500)
+
 
 class ProfileGridLayout(Screen):
 

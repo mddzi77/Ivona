@@ -14,6 +14,7 @@ Config.set('graphics', 'height', '600')
 class WindowManager(ScreenManager):
     pass
 
+
 class MyApp(App):
     icon = 'custom-kivy-icon.png'
     title = 'Basic Application'
