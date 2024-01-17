@@ -1,16 +1,9 @@
-from kivy.uix.gridlayout import GridLayout
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 from .FileRead import handle_dropfile
-from kivy.uix.dropdown import DropDown
-from kivy.properties import ObjectProperty
-import pandas as pd
 
 Builder.load_file('Screens/MainScreen/MainScreenLayout.kv')
-
-
-# Window.size = (1000, 100)
 
 class MainScreen(Screen):
 
