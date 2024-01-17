@@ -30,4 +30,6 @@
             text: 'Cancel'
             size_hint_y: None
             height: 50
-            on_press: quit()
+			on_release:
+				app.root.transition.direction = 'right'
+				app.root.current = '-main_screen-'

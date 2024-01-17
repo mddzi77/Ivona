@@ -7,8 +7,9 @@ from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 Builder.load_file('Screens/NewProfileScreen/NewProfileScreenLayout.kv')
-Window.size = (300, 500)
+# Window.size = (300, 500)
 
 
 class NewProfileGridLayout(Screen):
-    pass
+    def __init__(self, **kwargs):
+        super(NewProfileGridLayout, self).__init__(**kwargs)

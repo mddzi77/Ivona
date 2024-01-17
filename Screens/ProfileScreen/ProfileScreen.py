@@ -4,12 +4,15 @@ from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.core.window import Window
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import Screen
 
 Builder.load_file('Screens/ProfileScreen/ProfileScreenLayout.kv')
-Window.size = (300, 500)
+# Window.size = (300, 500)
 
 class ProfileGridLayout(Screen):
+
+    def __init__(self, **kwargs):
+        super(ProfileGridLayout, self).__init__(**kwargs)
 
     def function(self):
         pass
