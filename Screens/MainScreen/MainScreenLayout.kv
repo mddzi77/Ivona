@@ -1,0 +1,50 @@
+<MainScreen>:
+	GridLayout:
+		cols: 2
+
+		# BoxLayout for Buttons - LEFT
+		BoxLayout:
+			orientation: 'vertical'
+			spacing: 90
+			padding: 15
+
+			Label:
+				text: 'Ivona'
+				font_size: 35
+
+			Button:
+				text: 'New Profile'
+				id: new_profile
+				size_hint_y: None
+				height: 50
+				on_release:
+					app.root.transition.direction = 'left'
+					app.root.current = '-new_profile_screen-'
+
+
+			Button:
+				text: 'Profile'
+				id: profile
+				size_hint_y: None
+				height: 50
+				on_release:
+					app.root.transition.direction = 'left'
+					app.root.current = '-profile_screen-'
+
+			Button:
+				text: 'Exit'
+				id: exit
+				size_hint_y: None
+				height: 50
+				on_press: quit()
+
+
+		# BoxLayout for Text Panel - RIGHT
+		BoxLayout:
+			orientation: 'vertical'
+			spacing: 15
+			padding: 15
+
+			TextInput:
+				id: text_input
+				multiline: True
