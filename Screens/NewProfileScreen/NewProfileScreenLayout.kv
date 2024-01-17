@@ -18,14 +18,14 @@
             multiline: False
 
         ListBox:
-        	id: list_box
+        	id: list_box #list_box.refresh(new_profile_text_input.text)
 
         Button:
             id: add_button
             text: 'Add'
             size_hint_y: None
             height: 50
-            on_press: list_box.refresh(new_profile_text_input.text)
+            on_press: print('Nowy profil')
 
         Button:
             id: cancel_button
