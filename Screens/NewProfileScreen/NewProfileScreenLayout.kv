@@ -3,29 +3,27 @@
 
     BoxLayout:
         orientation: 'vertical'
-        spacing: 30
-        padding: 5
+        spacing: 50
+        padding: 10
 
         Label:
             text: 'New Profile'
             font_size: 35
-            size_hint_y: .2
-            pos_hint_y: {'center_y': .5}
 
         TextInput:
             id: new_profile_text_input
-            size_hint_y: .2
             multiline: False
 
-        ListBox:
-        	id: list_box #list_box.refresh(new_profile_text_input.text)
+        TextInput:
+            id: sound_drop
+            multiline: False
 
         Button:
             id: add_button
             text: 'Add'
             size_hint_y: None
             height: 50
-            on_press: print('Nowy profil')
+            on_press: print('New profile added')
 
         Button:
             id: cancel_button
