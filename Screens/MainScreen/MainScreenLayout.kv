@@ -39,12 +39,41 @@
 				on_press: quit()
 
 
-		# BoxLayout for Text Panel - RIGHT
-		BoxLayout:
-			orientation: 'vertical'
-			spacing: 15
-			padding: 15
+        #RIGHT SIDE
+		GridLayout:
+		    cols: 1
 
-			TextInput:
-				id: text_input
-				multiline: True
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: 15
+                padding: 15
+
+                TextInput:
+                    id: text_input
+                    multiline: True
+
+            BoxLayout:
+
+                cols: 3
+                size_hint_y: None
+                height: 60
+                spacing: 15
+                padding: 15
+
+                Button:
+                    text: 'Play'
+                    id: play
+                    size_hint_y: None
+                    height: 50
+
+                Button:
+                    text: 'Stop'
+                    id: stop
+                    size_hint_y: None
+                    height: 50
+
+                Button:
+                    text: 'Resume'
+                    id: resume
+                    size_hint_y: None
+                    height: 50

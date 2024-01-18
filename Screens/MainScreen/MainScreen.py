@@ -9,12 +9,7 @@ class MainScreen(Screen):
 
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
+        Window.bind(on_dropfile=lambda window, file_path: handle_dropfile(window, file_path, self.ids.text_input))
 
     def open_new_profile(self, button):
         print("New Profile")
-
-    # Drag & Drop File Handler
-    Window.bind(on_dropfile=lambda window, file_path: handle_dropfile(window, file_path))  # tu bez kivy self.text_input
-    # tak samo pozniej zbieranie textu i wszystkiego z kivy przez ID
-
-
