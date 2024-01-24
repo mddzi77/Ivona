@@ -12,10 +12,18 @@
 
         TextInput:
             id: new_profile_text_input
+            font_size: 50
+            multiline: False
+            halign: 'center'
+            valign: 'middle'
             multiline: False
 
         TextInput:
             id: sound_drop
+            font_size: 50
+            multiline: False
+            halign: 'center'
+            valign: 'middle'
             multiline: False
 
         Button:
@@ -23,7 +31,9 @@
             text: 'Add'
             size_hint_y: None
             height: 50
-            on_press: print('New profile added')
+            on_press: new_profile_text_input.text=""
+            on_press: sound_drop.text=""
+            on_press: root.pass_to_json(new_profile_text_input.text, sound_drop.text)
 
         Button:
             id: cancel_button
@@ -33,3 +43,5 @@
 			on_release:
 				app.root.transition.direction = 'right'
 				app.root.current = '-main_screen-'
+			on_press: new_profile_text_input.text=""
+            on_press: sound_drop.text=""
