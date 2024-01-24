@@ -3,28 +3,22 @@
 
     BoxLayout:
         orientation: 'vertical'
-        spacing: 50
-        padding: 10
+        spacing: 30
+        padding: 5
 
         Label:
             text: 'New Profile'
             font_size: 35
+            size_hint_y: .2
+            pos_hint_y: {'center_y': .5}
 
         TextInput:
             id: new_profile_text_input
-            font_size: 50
-            multiline: False
-            halign: 'center'
-            valign: 'middle'
+            size_hint_y: .2
             multiline: False
 
-        TextInput:
-            id: sound_drop
-            font_size: 50
-            multiline: False
-            halign: 'center'
-            valign: 'middle'
-            multiline: False
+        ListBox:
+        	id: list_box #list_box.refresh(new_profile_text_input.text)
 
         Button:
             id: add_button
@@ -33,7 +27,7 @@
             height: 50
             on_press: new_profile_text_input.text=""
             on_press: sound_drop.text=""
-            on_press: root.pass_to_json(new_profile_text_input.text, sound_drop.text)
+            on_press: root.pass_to_json(new_profile_text_input.text, 'path')
 
         Button:
             id: cancel_button
