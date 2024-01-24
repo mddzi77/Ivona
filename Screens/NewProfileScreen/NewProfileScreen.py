@@ -19,22 +19,6 @@ class NewProfileGridLayout(Screen):
     def __init__(self, **kwargs):
         super(NewProfileGridLayout, self).__init__(**kwargs)
 
-
-class ListBox(ScrollView):
-    values = ListProperty([])
-
-    def __init__(self, **kwargs):
-        super(ListBox, self).__init__(**kwargs)
-        self.content = GridLayout(cols=1, spacing=10, size_hint=(1, None), height=self.height)
-        self.content.bind(minimum_height=self.content.setter('height'))
-        self.add_widget(self.content)
-
-    def refresh(self, new_value):
-        self.content.clear_widgets()
-        self.values.append(new_value)
-        for v in self.values:
-            self.content.add_widget(Button(text=v, size_hint_y=None, height=40))
-
     def pass_to_json(self, profile_name, file_name):
 
         new_data = {
@@ -53,3 +37,19 @@ class ListBox(ScrollView):
 
         with open("Assets/profiles.json", "w") as f:
             json.dump(existing_data, f, indent=2)
+
+
+class ListBox(ScrollView):
+    values = ListProperty([])
+
+    def __init__(self, **kwargs):
+        super(ListBox, self).__init__(**kwargs)
+        self.content = GridLayout(cols=1, spacing=10, size_hint=(1, None), height=self.height)
+        self.content.bind(minimum_height=self.content.setter('height'))
+        self.add_widget(self.content)
+
+    def refresh(self, new_value):
+        self.content.clear_widgets()
+        self.values.append(new_value)
+        for v in self.values:
+            self.content.add_widget(Button(text=v, size_hint_y=None, height=40))
