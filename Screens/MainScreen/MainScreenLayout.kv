@@ -54,26 +54,36 @@
 
             BoxLayout:
 
-                cols: 3
+                cols: 4
                 size_hint_y: None
                 height: 60
                 spacing: 15
                 padding: 15
 
                 Button:
+                    text: 'Generate'
+                    id: generate
+                    background_color: 0.1, 0.9, 0.3, 1
+                    size_hint_y: None
+                    height: 50
+
+                Button:
                     text: 'Play'
                     id: play
+                    background_color: 0.5, 0.7, 1, 1
                     size_hint_y: None
                     height: 50
 
                 Button:
                     text: 'Stop'
                     id: stop
+                    background_color: 0.5, 0.7, 1, 1
                     size_hint_y: None
                     height: 50
 
                 Button:
                     text: 'Resume'
                     id: resume
+                    background_color: 0.5, 0.7, 1, 1
                     size_hint_y: None
                     height: 50
