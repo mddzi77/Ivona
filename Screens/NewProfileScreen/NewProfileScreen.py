@@ -1,17 +1,16 @@
+from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.screenmanager import Screen
-from kivy.properties import ListProperty
+from kivy.properties import ListProperty, StringProperty
 from kivy.uix.button import Button
 from kivy.uix.scrollview import ScrollView
 
 Builder.load_file('Screens/NewProfileScreen/NewProfileScreenLayout.kv')
 
-
 class NewProfileGridLayout(Screen):
     def __init__(self, **kwargs):
         super(NewProfileGridLayout, self).__init__(**kwargs)
-
 
 class ListBox(ScrollView):
     values = ListProperty([])
