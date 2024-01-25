@@ -1,11 +1,8 @@
-from kivy.uix.widget import Widget
-from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
-from kivy.uix.label import Label
-from kivy.core.window import Window
-from kivy.uix.screenmanager import ScreenManager, Screen
 import json
+import main
+from multiprocessing import Process
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ListProperty
 from kivy.uix.button import Button
@@ -19,7 +16,8 @@ class NewProfileGridLayout(Screen):
     def __init__(self, **kwargs):
         super(NewProfileGridLayout, self).__init__(**kwargs)
 
-    def pass_to_json(self, profile_name, file_name):
+    @staticmethod
+    def pass_to_json(profile_name, file_name, voice_id):
 
         new_data = {
             "ProfileName": profile_name,
@@ -37,6 +35,12 @@ class NewProfileGridLayout(Screen):
 
         with open("Assets/profiles.json", "w") as f:
             json.dump(existing_data, f, indent=2)
+
+    def add_profile(self, profile_name, file_name):
+        tts = main.MyApp.tts
+        tts.set_recordings([file_name])
+        voice = main.MyApp.tts.clone(profile_name)
+        self.pass_to_json(profile_name, file_name, voice.voice_id)
 
 
 class ListBox(ScrollView):
