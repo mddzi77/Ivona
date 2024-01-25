@@ -5,7 +5,6 @@ from kivy.lang import Builder
 from kivy.app import App
 from kivy.config import Config
 from kivy.uix.screenmanager import ScreenManager
-from TextToSpeech.text_to_speech import ElevenLabs
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 Config.set('graphics', 'Width', '800')
@@ -23,7 +22,6 @@ class MyApp(App):
         root.current = '-main_screen-'  # set the current screen to main screen, just in case
         root.add_widget(NewProfileGridLayout(name='-new_profile_screen-'))
         root.add_widget(ProfileGridLayout(name='-profile_screen-'))
-        test_value = 'testtest'
 
         return root
 

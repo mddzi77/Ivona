@@ -1,16 +1,15 @@
+from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
 import json
 import main
 from multiprocessing import Process
 from kivy.uix.screenmanager import Screen
-from kivy.properties import ListProperty
+from kivy.properties import ListProperty, StringProperty
 from kivy.uix.button import Button
 from kivy.uix.scrollview import ScrollView
 
 Builder.load_file('Screens/NewProfileScreen/NewProfileScreenLayout.kv')
-# Window.size = (300, 500)
-
 
 class NewProfileGridLayout(Screen):
     def __init__(self, **kwargs):
