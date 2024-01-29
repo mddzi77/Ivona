@@ -1,37 +1,7 @@
 [
   {
-    "ProfileName": "blabla",
-    "Path": "Assets/path.wav",
-    "VoiceID": null
-  },
-  {
     "ProfileName": "maks",
-    "Path": "Assets/path.wav",
-    "VoiceID": null
-  },
-  {
-    "ProfileName": "profil1",
-    "Path": "Assets/path.wav",
-    "VoiceID": null
-  },
-  {
-    "ProfileName": "blabla",
-    "Path": "Assets/path.wav",
-    "VoiceID": null
-  },
-  {
-    "ProfileName": "maks",
-    "Path": "Assets/path.wav",
-    "VoiceID": null
-  },
-  {
-    "ProfileName": "profil1",
-    "Path": "Assets/path.wav",
-    "VoiceID": null
-  },
-  {
-    "ProfileName": "walic sesje na ryj",
-    "Path": "Assets/path.wav",
-    "VoiceID": null
+    "Path": "E:/Dokumenty i prace/Studia/ProjektGrupowy/Recordings/rec1.mp3",
+    "VoiceID": "XRzD7r7kMxFhbN6fiuud"
   }
 ]
