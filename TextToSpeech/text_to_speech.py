@@ -21,7 +21,7 @@ class ElevenLabs(TextToSpeechInterface):
         self.__recordings = recordings
 
     def clone(self, name: str, description=None):
-        return clone(name=name, description=description, files=self.__recordings, api_key=self.__api_key)
+        return clone(name=name, files=self.__recordings, api_key=self.__api_key)
 
     def generate(self):
         self.audio = generate(self.__text, self.__api_key, self.__voice, self.__model)

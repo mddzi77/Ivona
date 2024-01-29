@@ -41,9 +41,11 @@ class NewProfileGridLayout(Screen):
 
     def add_profile(self, profile_name):
         file_name = get_file_name()
+        self.ids.status_label.text = "Creating profile..."
         self.tts.set_recordings([file_name])
         voice = self.tts.clone(profile_name)
         self.pass_to_json(profile_name, file_name, voice.voice_id)
+        self.ids.status_label.text = "Profile created!"
 
 
 class ListBox(ScrollView):

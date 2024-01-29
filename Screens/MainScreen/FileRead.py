@@ -10,11 +10,9 @@ def handle_dropfile(window, file_path, text_input):
     last_element = os.path.basename(file_path.decode('utf-8'))
     file_extension = os.path.splitext(file_path.decode('utf-8'))[1]
 
-    if file_extension == '.wav':
+    if file_extension == '.wav' or file_extension == '.mp3':
         global file_name
         file_name = file_path.decode('utf-8').replace('\\', '/')
-        print("Sciezka pliku: ", file_path)
-        print("Nazwa: ", last_element)
 
     try:
         if text_input.collide_point(*window.mouse_pos):
