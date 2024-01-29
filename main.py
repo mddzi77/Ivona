@@ -1,6 +1,7 @@
 from Screens.MainScreen.MainScreen import MainScreen
 from Screens.NewProfileScreen.NewProfileScreen import NewProfileGridLayout
 from Screens.ProfileScreen.ProfileScreen import ProfileGridLayout
+from TextToSpeech.text_to_speech import ElevenLabs
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.config import Config
