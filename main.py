@@ -5,6 +5,7 @@ from kivy.lang import Builder
 from kivy.app import App
 from kivy.config import Config
 from kivy.uix.screenmanager import ScreenManager
+import json
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 Config.set('graphics', 'Width', '800')
@@ -12,6 +13,7 @@ Config.set('graphics', 'height', '600')
 
 class WindowManager(ScreenManager):
     pass
+
 
 class MyApp(App):
     icon = 'custom-kivy-icon.png'

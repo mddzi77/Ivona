@@ -14,7 +14,12 @@
 
         TextInput:
             id: new_profile_text_input
-            size_hint_y: .2
+            font_size: 50
+			multiline: False
+			halign: 'center'
+			valign: 'middle'
+			multiline: False
+            size_hint_y: .3
             multiline: False
 
         ListBox:
@@ -25,7 +30,8 @@
             text: 'Add'
             size_hint_y: None
             height: 50
-            on_press: print('Nowy profil')
+            on_press: new_profile_text_input.text=""
+            on_press: root.pass_to_json(new_profile_text_input.text, 'path')
 
         Button:
             id: cancel_button
@@ -35,3 +41,4 @@
 			on_release:
 				app.root.transition.direction = 'right'
 				app.root.current = '-main_screen-'
+			on_press: new_profile_text_input.text=""
