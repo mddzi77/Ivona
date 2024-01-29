@@ -1,11 +1,13 @@
 from kivy.core.window import Window
+from kivy.uix.widget import Widget
+from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
 import json
 from Screens.MainScreen.FileRead import get_file_name
 from multiprocessing import Process
 from kivy.uix.screenmanager import Screen
-from kivy.properties import ListProperty, StringProperty
+from kivy.properties import ListProperty
 from kivy.uix.button import Button
 from kivy.uix.scrollview import ScrollView
 
