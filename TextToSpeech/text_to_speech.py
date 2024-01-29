@@ -1,5 +1,5 @@
 from elevenlabs import voices, generate, clone, play, Voice, set_api_key
-from tts_Interface import TextToSpeechInterface
+from TextToSpeech.tts_Interface import TextToSpeechInterface
 
 
 class ElevenLabs(TextToSpeechInterface):
@@ -7,7 +7,7 @@ class ElevenLabs(TextToSpeechInterface):
     def __init__(self):
         self.voices_list = []
         self.__model = 'eleven_multilingual_v2'
-        self.__api_key = open('api_key.txt', 'r').read()
+        self.__api_key = open('TextToSpeech/api_key.txt', 'r').read()
         self.audio = None
         self.name = 'Name'
         self.__text: str = ''
