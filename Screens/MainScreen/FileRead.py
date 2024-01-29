@@ -13,6 +13,7 @@ def handle_dropfile(window, file_path, text_input):
     if file_extension == '.wav' or file_extension == '.mp3':
         global file_name
         file_name = file_path.decode('utf-8').replace('\\', '/')
+        return
 
     try:
         if text_input.collide_point(*window.mouse_pos):

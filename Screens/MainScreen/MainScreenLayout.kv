@@ -25,6 +25,8 @@
 				id: profiles_dropdown
 				size_hint_y: None
 				height: 50
+				on_text:
+					root.select_voice(self.text)
 
 			# SPACER
 			Label:
@@ -74,6 +76,8 @@
                     background_color: 0.1, 0.9, 0.3, 1
                     size_hint_y: None
                     height: 50
+                    on_release:
+						root.generate_audio()
 
                 Button:
                     text: 'Play'
@@ -81,6 +85,8 @@
                     background_color: 0.5, 0.7, 1, 1
                     size_hint_y: None
                     height: 50
+                    on_release:
+						root.play_audio()
 
                 Button:
                     text: 'Stop'
