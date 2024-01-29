@@ -1,4 +1,5 @@
 <NewProfileGridLayout>:
+	id: new_profile
     cols: 1
 
     BoxLayout:
@@ -30,8 +31,12 @@
             text: 'Add'
             size_hint_y: None
             height: 50
-            on_press: new_profile_text_input.text=""
             on_press: root.pass_to_json(new_profile_text_input.text, 'path')
+            on_release: new_profile_text_input.text=""
+            on_release: app.root.get_screen('-main_screen-').ids.profiles_dropdown.refresh_list()
+			on_release:
+				app.root.transition.direction = 'right'
+				app.root.current = '-main_screen-'
 
         Button:
             id: cancel_button

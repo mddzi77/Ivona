@@ -1,4 +1,5 @@
 <MainScreen>:
+	id: main_screen
 	GridLayout:
 		cols: 2
 
@@ -21,15 +22,23 @@
 					app.root.transition.direction = 'left'
 					app.root.current = '-new_profile_screen-'
 
-
-			Button:
-				text: 'Profile'
-				id: profile
+			ProfilesDropDown:
+				id: profiles_dropdown
 				size_hint_y: None
 				height: 50
-				on_release:
-					app.root.transition.direction = 'left'
-					app.root.current = '-profile_screen-'
+
+			# SPACER
+			Label:
+				text: ''
+
+#			Button:
+#				text: 'Profile'
+#				id: profile
+#				size_hint_y: None
+#				height: 50
+#				on_release:
+#					app.root.transition.direction = 'left'
+#					app.root.current = '-profile_screen-'
 
 			Button:
 				text: 'Exit'
