@@ -2,7 +2,7 @@ from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
 import json
-import main
+from Screens.MainScreen.FileRead import get_file_name
 from multiprocessing import Process
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ListProperty, StringProperty
@@ -11,17 +11,19 @@ from kivy.uix.scrollview import ScrollView
 
 Builder.load_file('Screens/NewProfileScreen/NewProfileScreenLayout.kv')
 
+
 class NewProfileGridLayout(Screen):
-    def __init__(self, **kwargs):
+    def __init__(self, tts, **kwargs):
         super(NewProfileGridLayout, self).__init__(**kwargs)
+        self.tts = tts
 
     @staticmethod
     def pass_to_json(profile_name, file_name, voice_id):
 
         new_data = {
             "ProfileName": profile_name,
-            "Path": "Assets/" + file_name + ".wav",
-            "VoiceID": None
+            "Path": file_name,
+            "VoiceID": voice_id
         }
 
         try:
@@ -35,10 +37,10 @@ class NewProfileGridLayout(Screen):
         with open("Assets/profiles.json", "w") as f:
             json.dump(existing_data, f, indent=2)
 
-    def add_profile(self, profile_name, file_name):
-        tts = main.MyApp.tts
-        tts.set_recordings([file_name])
-        voice = main.MyApp.tts.clone(profile_name)
+    def add_profile(self, profile_name):
+        file_name = get_file_name()
+        self.tts.set_recordings([file_name])
+        voice = self.tts.clone(profile_name)
         self.pass_to_json(profile_name, file_name, voice.voice_id)
 
 

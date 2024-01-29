@@ -18,9 +18,9 @@ class MyApp(App):
 
     def build(self):
         root = ScreenManager()
-        root.add_widget(MainScreen(name='-main_screen-'))
+        root.add_widget(MainScreen(self.tts, name='-main_screen-'))
         root.current = '-main_screen-'  # set the current screen to main screen, just in case
-        root.add_widget(NewProfileGridLayout(name='-new_profile_screen-'))
+        root.add_widget(NewProfileGridLayout(self.tts, name='-new_profile_screen-'))
         root.add_widget(ProfileGridLayout(name='-profile_screen-'))
 
         return root
