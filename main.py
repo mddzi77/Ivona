@@ -11,26 +11,6 @@ Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 Config.set('graphics', 'Width', '800')
 Config.set('graphics', 'height', '600')
 
-# new_data = {
-#     "ProfileName": "profile_name",
-#     "Path": "wav_path"
-# }
-#
-# try:
-#     with open("Screens/NewProfileScreen/profiles.json", "r") as f:
-#         existing_data = json.load(f)
-# except FileNotFoundError:
-#     existing_data = []
-#
-# existing_data.append(new_data)
-#
-# with open("Screens/NewProfileScreen/profiles.json", "w") as f:
-#     json.dump(existing_data, f, indent=2)
-
-# print(existing_data.items())
-
-
-
 class WindowManager(ScreenManager):
     pass
 
@@ -47,8 +27,6 @@ class MyApp(App):
         root.add_widget(ProfileGridLayout(name='-profile_screen-'))
 
         return root
-
-    # def
 
 
 if __name__ == "__main__":
