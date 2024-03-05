@@ -1,4 +1,4 @@
-from elevenlabs import voices, generate, clone, play, Voice, set_api_key
+from elevenlabs import generate, clone, play, Voice, set_api_key
 from TextToSpeech.tts_Interface import TextToSpeechInterface
 
 
@@ -10,7 +10,7 @@ class ElevenLabs(TextToSpeechInterface):
         self.__api_key = open('TextToSpeech/api_key.txt', 'r').read()
         self.audio = None
         self.name = 'Name'
-        self.__voice = None
+        self.__voice: Voice = None
         self.__text: str = ''
         self.__recordings = []
         set_api_key(self.__api_key)
@@ -31,11 +31,12 @@ class ElevenLabs(TextToSpeechInterface):
         if self.__voice is None:
             raise Exception('Voice not set')
         self.audio = generate(self.__text, self.__api_key, self.__voice, self.__model)
+        # with open(f'TextToSpeech/{self.__voice}.mp3', 'wb') as f:
+        #     f.write(self.audio)
 
     def play(self):
         if self.__voice is None:
             raise Exception('Voice not set')
         elif self.audio is None:
             raise Exception('Audio not generated')
-        self.audio = generate(self.__text, self.__api_key, self.__voice, self.__model)
         play(self.audio, use_ffmpeg=False)
