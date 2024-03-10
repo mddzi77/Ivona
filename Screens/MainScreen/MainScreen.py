@@ -6,6 +6,7 @@ from kivy.uix.spinner import Spinner
 from kivy.properties import ListProperty
 from kivy.uix.button import Button
 from .FileRead import handle_dropfile
+from TextToSpeech.tts_handler import TTSHandler
 from kivy.metrics import dp
 import json
 
@@ -14,10 +15,9 @@ Builder.load_file('Screens/MainScreen/MainScreenLayout.kv')
 
 class MainScreen(Screen):
 
-    def __init__(self, tts, **kwargs):
+    def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
         Window.bind(on_drop_file=self._on_file_drop)
-        self.tts = tts
 
     def _on_file_drop(self, window, file_path, x, y):
         handle_dropfile(window, file_path, self.ids.text_input)
@@ -30,7 +30,7 @@ class MainScreen(Screen):
                 for profile in profiles:
                     if profile["ProfileName"] == voice_name:
                         voice_id = profile["VoiceID"]
-                self.tts.set_voice(voice_id)
+                TTSHandler.set_voice(voice_id)
         except FileNotFoundError as e:
             print(e)
 
@@ -39,14 +39,14 @@ class MainScreen(Screen):
             print("No text to generate")
             return
         try:
-            self.tts.set_text(self.ids.text_input.text)
-            self.tts.generate()
+            TTSHandler.set_text(self.ids.text_input.text)
+            TTSHandler.generate()
         except Exception as e:
             print(e)
 
     def play_audio(self):
         try:
-            self.tts.play()
+            TTSHandler.play()
         except Exception as e:
             print(e)
 

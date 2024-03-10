@@ -10,14 +10,14 @@ from kivy.uix.screenmanager import Screen
 from kivy.properties import ListProperty
 from kivy.uix.button import Button
 from kivy.uix.scrollview import ScrollView
+from TextToSpeech.tts_handler import TTSHandler
 
 Builder.load_file('Screens/NewProfileScreen/NewProfileScreenLayout.kv')
 
 
 class NewProfileGridLayout(Screen):
-    def __init__(self, tts, **kwargs):
+    def __init__(self, **kwargs):
         super(NewProfileGridLayout, self).__init__(**kwargs)
-        self.tts = tts
 
     @staticmethod
     def pass_to_json(profile_name, file_name, voice_id):
@@ -42,8 +42,8 @@ class NewProfileGridLayout(Screen):
     def add_profile(self, profile_name):
         file_name = get_file_name()
         self.ids.status_label.text = "Creating profile..."
-        self.tts.set_recordings([file_name])
-        voice = self.tts.clone(profile_name)
+        TTSHandler.set_recordings([file_name])
+        voice = TTSHandler.clone(profile_name)
         self.pass_to_json(profile_name, file_name, voice.voice_id)
         self.ids.status_label.text = "Profile created!"
 
