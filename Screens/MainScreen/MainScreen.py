@@ -17,9 +17,10 @@ class MainScreen(Screen):
 
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
-        Window.bind(on_drop_file=self._on_file_drop)
+        Window.bind(on_drop_file=self.on_file_drop)
+        self.refresh_event = None
 
-    def _on_file_drop(self, window, file_path, x, y):
+    def on_file_drop(self, window, file_path, x, y):
         handle_dropfile(window, file_path, self.ids.text_input)
 
     def select_voice(self, voice_name):
