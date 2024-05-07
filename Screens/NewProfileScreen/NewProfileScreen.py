@@ -11,6 +11,8 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
 import json
+
+from PredefinedPopups.popup import TextPopup, OkPopup
 from Screens.MainScreen.FileRead import get_file_name
 from multiprocessing import Process
 from kivy.uix.screenmanager import Screen
@@ -23,28 +25,20 @@ from kivy.uix.popup import Popup
 Builder.load_file('Screens/NewProfileScreen/NewProfileScreenLayout.kv')
 
 
-class NewProfileGridLayout(Screen):
+class NewProfileScreen(Screen):
     def __init__(self, **kwargs):
-        super(NewProfileGridLayout, self).__init__(**kwargs)
-        self.loading_popup = (Popup(
-                title='Loading',
-                content=Label(text="Loading"),
-                size_hint=(None, None),
-                size=(300, 180),
-                auto_dismiss=False)
-            )
-        self.modal_view = ModalView(size_hint=(1, 1), background_color=(0, 0, 0, .7))
-        self.modal_view.add_widget(self.loading_popup)
+        super(NewProfileScreen, self).__init__(**kwargs)
+        self.popup = TextPopup('Creating profile', 'Loading')
         self.refresh_event = None
         self.refresh_tick = 0
 
     def add_profile(self, profile_name):
-        self.modal_view.open()
+        self.popup.show()
         self.refresh_event = Clock.schedule_interval(lambda dt: self.__popup_refresher(), 0.3)
         threading.Thread(target=self.__clone_thread, args=(profile_name,)).start()
 
     def __popup_refresher(self):
-        self.loading_popup.content = Label(text=f"Creating profile{self.refresh_tick * '.'}")
+        self.popup.set_text(Label(text=f"Creating profile{self.refresh_tick * '.'}"))
         self.refresh_tick += 1
         if self.refresh_tick > 3:
             self.refresh_tick = 0
@@ -57,22 +51,17 @@ class NewProfileGridLayout(Screen):
         Clock.schedule_once(lambda dt: self.__cloning_finished())
 
     def __cloning_finished(self):
-        layout = BoxLayout(orientation='vertical')
-        layout.add_widget(Label(text="Profile created successfully"))
-        layout.add_widget(Button(
-                text="OK",
-                on_press=lambda x: self.__loading_popup_ok(),
-                size_hint=(0.2, 0.2),
-                pos_hint={'center_x': 0.5}
-            ))
-        self.manager.get_screen('-main_screen-').ids.profiles_dropdown.refresh_list()
-        self.loading_popup.content = layout
         Clock.unschedule(self.refresh_event)
+        self.popup.dismiss()
+        self.popup = OkPopup(lambda dt: self.__loading_popup_ok(), 'Ok', 'Profile created')
+        self.popup.set_button_size(size_hint=(.2, .5))
+        self.popup.show()
+        self.manager.get_screen('-main_screen-').ids.profiles_dropdown.refresh_list()
 
     def __loading_popup_ok(self):
-        self.modal_view.dismiss()
         self.manager.transition.direction = 'right'
         self.manager.current = '-main_screen-'
+        self.popup.dismiss()
 
     def __pass_to_json(self, profile_name, file_name, voice_id):
 

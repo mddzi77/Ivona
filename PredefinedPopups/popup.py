@@ -24,29 +24,26 @@ class PopupBase:
 
 
 class TextPopup(PopupBase):
-    def __init__(self, text: str | Label, title: str = None):
+    def __init__(self, text: str | Label, title: str):
         super().__init__()
         self.__text = None
         self.set_text(text)
-        self._popup.content = self.__text
-        if title is not None:
-            self._popup.title = title
+        self._popup.title = title
 
     def set_text(self, text: str | Label):
-        if type(text) is str:
-            self.__text = Label(text=text)
-        else:
-            self.__text = text
+        self._popup.content = Label(text=text) if type(text) is str else text
 
 
 class OkPopup(PopupBase):
     def __init__(self, button_callback, button_text: str = 'Ok', title: str = None):
         super().__init__()
-        self.__button = Button(text=button_text, pos_hint={'center_x': 0.5})
-        self.__button.bind(on_realese=button_callback)
-        self._popup.content = self.__button
+        self.__button = Button(text=button_text, pos_hint={'center_x': 0.5, 'center_y': .5})
+        self.__button.bind(on_release=button_callback)
+        self.set_size((280, 120))
+        self.set_button_size(size_hint=(.2, .5))
         if title is not None:
             self._popup.title = title
+        self._popup.content = self.__button
 
     def set_button_text(self, text):
         self.__button.text = text

@@ -26,7 +26,7 @@ class MainScreen(Screen):
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
         Window.bind(on_drop_file=self.on_file_drop)
-        self.popup = TextPopup('Creating profile')
+        self.popup = TextPopup('Generating', 'Loading')
         self.refresh_event = None
         self.refresh_tick = 0
 
@@ -51,7 +51,7 @@ class MainScreen(Screen):
             return
         self.popup.show()
         self.refresh_event = Clock.schedule_interval(lambda dt: self.__popup_refresher(), 0.3)
-        threading.Thread(target=self.__generate_thread()).start()
+        threading.Thread(target=self.__generate_thread).start()
 
     def play_audio(self):
         try:
@@ -66,7 +66,7 @@ class MainScreen(Screen):
         Clock.unschedule(self.refresh_event)
 
     def __popup_refresher(self):
-        self.popup.set_text(Label(text=f"Creating profile{self.refresh_tick * '.'}"))
+        self.popup.set_text(Label(text=f"Generating{self.refresh_tick * '.'}"))
         self.refresh_tick += 1
         if self.refresh_tick > 3:
             self.refresh_tick = 0
