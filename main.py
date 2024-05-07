@@ -1,5 +1,5 @@
 from Screens.MainScreen.MainScreen import MainScreen
-from Screens.NewProfileScreen.NewProfileScreen import NewProfileGridLayout
+from Screens.NewProfileScreen.NewProfileScreen import NewProfileScreen
 from Screens.ProfileScreen.ProfileScreen import ProfileGridLayout
 from TextToSpeech.tts_handler import *
 from kivy.lang import Builder
@@ -23,7 +23,7 @@ class MyApp(App):
         root = ScreenManager()
         root.add_widget(MainScreen(name='-main_screen-'))
         root.current = '-main_screen-'  # set the current screen to main screen, just in case
-        root.add_widget(NewProfileGridLayout(name='-new_profile_screen-'))
+        root.add_widget(NewProfileScreen(name='-new_profile_screen-'))
         root.add_widget(ProfileGridLayout(name='-profile_screen-'))
 
         return root
