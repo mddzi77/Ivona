@@ -1,12 +1,13 @@
 import fitz     # to jest jak cos biblio PyMuPDF, niestety zainstalowac trza, ale czyta duzo wiecej niz pdf
 import os
 from pathlib import WindowsPath
+from kivy.core.window import Window
 
 
 file_name = ''
 
 
-def handle_dropfile(window, file_path, text_input):
+def handle_dropfile(window: Window, file_path, text_input):
     last_element = os.path.basename(file_path.decode('utf-8'))
     file_extension = os.path.splitext(file_path.decode('utf-8'))[1]
 
@@ -20,6 +21,8 @@ def handle_dropfile(window, file_path, text_input):
             read_pdf(file_path, text_input)
     except Exception as e:
         text_input.text = f"Error: {str(e)}"
+
+    Window.raise_window()
 
 
 def read_pdf(file_path, text_input):
