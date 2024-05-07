@@ -1,10 +1,18 @@
+import threading
+
+from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.lang import Builder
+from kivy.uix.label import Label
+from kivy.uix.modalview import ModalView
+from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
 from kivy.uix.dropdown import DropDown
 from kivy.uix.spinner import Spinner
 from kivy.properties import ListProperty
 from kivy.uix.button import Button
+
+from PredefinedPopups.popup import TextPopup
 from .FileRead import handle_dropfile
 from TextToSpeech.tts_handler import TTSHandler
 from kivy.metrics import dp
@@ -18,7 +26,9 @@ class MainScreen(Screen):
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
         Window.bind(on_drop_file=self.on_file_drop)
+        self.popup = TextPopup('Creating profile')
         self.refresh_event = None
+        self.refresh_tick = 0
 
     def on_file_drop(self, window, file_path, x, y):
         handle_dropfile(window, file_path, self.ids.text_input)
@@ -39,17 +49,27 @@ class MainScreen(Screen):
         if self.ids.text_input.text == "":
             print("No text to generate")
             return
-        try:
-            TTSHandler.set_text(self.ids.text_input.text)
-            TTSHandler.generate()
-        except Exception as e:
-            print(e)
+        self.popup.show()
+        self.refresh_event = Clock.schedule_interval(lambda dt: self.__popup_refresher(), 0.3)
+        threading.Thread(target=self.__generate_thread()).start()
 
     def play_audio(self):
         try:
             TTSHandler.play()
         except Exception as e:
             print(e)
+
+    def __generate_thread(self):
+        TTSHandler.set_text(self.ids.text_input.text)
+        TTSHandler.generate()
+        self.popup.dismiss()
+        Clock.unschedule(self.refresh_event)
+
+    def __popup_refresher(self):
+        self.popup.set_text(Label(text=f"Creating profile{self.refresh_tick * '.'}"))
+        self.refresh_tick += 1
+        if self.refresh_tick > 3:
+            self.refresh_tick = 0
 
 
 class ProfilesDropDown(Spinner):

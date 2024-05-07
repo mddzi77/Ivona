@@ -33,8 +33,7 @@
             text: 'Add'
             size_hint_y: None
             height: 50
-            on_press: root.add_profile(new_profile_text_input.text) #root.pass_to_json(new_profile_text_input.text, 'path')
-            on_release: app.root.get_screen('-main_screen-').ids.profiles_dropdown.refresh_list()
+            on_press: root.add_profile(new_profile_text_input.text)
             on_release: new_profile_text_input.text=""
 
         Button:

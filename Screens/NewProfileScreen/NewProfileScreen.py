@@ -35,16 +35,13 @@ class NewProfileGridLayout(Screen):
             )
         self.modal_view = ModalView(size_hint=(1, 1), background_color=(0, 0, 0, .7))
         self.modal_view.add_widget(self.loading_popup)
-        self.clone_p = None
         self.refresh_event = None
         self.refresh_tick = 0
 
     def add_profile(self, profile_name):
-        self.ids.status_label.text = "Creating profile..."
         self.modal_view.open()
         self.refresh_event = Clock.schedule_interval(lambda dt: self.__popup_refresher(), 0.3)
         threading.Thread(target=self.__clone_thread, args=(profile_name,)).start()
-        #Clock.schedule_once(lambda dt: self.__clone(profile_name), 2)
 
     def __popup_refresher(self):
         self.loading_popup.content = Label(text=f"Creating profile{self.refresh_tick * '.'}")
@@ -68,6 +65,7 @@ class NewProfileGridLayout(Screen):
                 size_hint=(0.2, 0.2),
                 pos_hint={'center_x': 0.5}
             ))
+        self.manager.get_screen('-main_screen-').ids.profiles_dropdown.refresh_list()
         self.loading_popup.content = layout
         Clock.unschedule(self.refresh_event)
 
