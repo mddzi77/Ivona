@@ -72,14 +72,14 @@ class NewProfileScreen(Screen):
         }
 
         try:
-            with open("Assets/profiles.json", "r") as f:
+            with open("Assets/settings.json", "r") as f:
                 existing_data = json.load(f)
         except FileNotFoundError:
             existing_data = []
 
-        existing_data.append(new_data)
+        existing_data['profiles'].append(new_data)
 
-        with open("Assets/profiles.json", "w") as f:
+        with open("Assets/settings.json", "w") as f:
             json.dump(existing_data, f, indent=2)
 
 

@@ -14,9 +14,11 @@ from kivy.uix.button import Button
 
 from PredefinedPopups.popup import TextPopup
 from .FileRead import handle_dropfile
-from TextToSpeech.tts_handler import TTSHandler
+
 from kivy.metrics import dp
 import json
+
+from TextToSpeech.tts_handler import TTSHandler
 
 Builder.load_file('Screens/MainScreen/MainScreenLayout.kv')
 
@@ -35,8 +37,8 @@ class MainScreen(Screen):
 
     def select_voice(self, voice_name):
         try:
-            with open("Assets/profiles.json", "r") as f:
-                profiles = json.load(f)
+            with open("Assets/settings.json", "r") as f:
+                profiles = json.load(f)['profiles']
                 voice_id = ''
                 for profile in profiles:
                     if profile["ProfileName"] == voice_name:
@@ -90,7 +92,7 @@ class ProfilesDropDown(Spinner):
     def __get_profiles_from_json(self):
         self.profiles.clear()
         try:
-            with open("Assets/profiles.json", "r") as f:
+            with open("Assets/settings.json", "r") as f:
                 existing_data = json.load(f)
                 for profile in existing_data:
                     self.profiles.append(profile["ProfileName"])
