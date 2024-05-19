@@ -1,5 +1,5 @@
 from elevenlabs import generate, clone, play, Voice, set_api_key
-from TextToSpeech.tts_Interface import TextToSpeechInterface
+from texttospeech.tts_Interface import TextToSpeechInterface
 
 
 class ElevenLabs(TextToSpeechInterface):

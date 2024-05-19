@@ -1,26 +1,18 @@
 import threading
-import time
 
 from kivy.clock import Clock
-from kivy.core.window import Window
-from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
-from kivy.uix.modalview import ModalView
-from kivy.uix.widget import Widget
-from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
 import json
 
 from PredefinedPopups.popup import TextPopup, OkPopup
-from Screens.MainScreen.FileRead import get_file_name
-from multiprocessing import Process
+from FileRead.file_read import get_file_name
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ListProperty
 from kivy.uix.button import Button
 from kivy.uix.scrollview import ScrollView
-from TextToSpeech.tts_handler import TTSHandler
-from kivy.uix.popup import Popup
+from texttospeech.tts_handler import TTSHandler
 
 Builder.load_file('Screens/NewProfileScreen/NewProfileScreenLayout.kv')
 

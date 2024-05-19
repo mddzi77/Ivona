@@ -4,21 +4,17 @@ from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.label import Label
-from kivy.uix.modalview import ModalView
-from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
-from kivy.uix.dropdown import DropDown
 from kivy.uix.spinner import Spinner
 from kivy.properties import ListProperty
-from kivy.uix.button import Button
 
 from PredefinedPopups.popup import TextPopup
-from .FileRead import handle_dropfile
+from FileRead.file_read import handle_dropfile
 
 from kivy.metrics import dp
 import json
 
-from TextToSpeech.tts_handler import TTSHandler
+from texttospeech.tts_handler import TTSHandler
 
 Builder.load_file('Screens/MainScreen/MainScreenLayout.kv')
 

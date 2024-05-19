@@ -1,5 +1,5 @@
 from .tts_Interface import TextToSpeechInterface
-from .text_to_speech import ElevenLabs
+from TextToSpeech.ElevenLabs.eleven_labs import ElevenLabs
 from enum import Enum
 
 
