@@ -1,3 +1,4 @@
+#: import t Localization.localization.t
 <MainScreen>:
 	GridLayout:
 		cols: 2
@@ -13,7 +14,7 @@
 				font_size: 35
 
 			Button:
-				text: 'New Profile'
+				text: t('new_profile')
 				id: new_profile
 				size_hint_y: None
 				height: 50
@@ -42,7 +43,7 @@
 #					app.root.current = '-profile_screen-'
 
 			Button:
-				text: 'Exit'
+				text: t('exit')
 				id: exit
 				size_hint_y: None
 				height: 50
@@ -71,33 +72,36 @@
                 padding: 15
 
                 Button:
-                    text: 'Generate'
-                    id: generate
-                    background_color: 0.1, 0.9, 0.3, 1
+                    text: t('generate')
+                    id: generate_play
+                    background_color: 1, 0.1, 0.1, 1
                     size_hint_y: None
                     height: 50
+
                     on_release:
-						root.generate_audio()
+						root.generate_play_button()
+
+#                Button:
+#                    text: t('play')
+#                    id: play
+#                    background_color: 0.5, 0.7, 1, 1
+#                    size_hint_y: None
+#                    height: 50
+#                    on_release:
+#						root.play_audio()
 
                 Button:
-                    text: 'Play'
-                    id: play
-                    background_color: 0.5, 0.7, 1, 1
-                    size_hint_y: None
-                    height: 50
-                    on_release:
-						root.play_audio()
-
-                Button:
-                    text: 'Stop'
+                    text: t('stop')
                     id: stop
                     background_color: 0.5, 0.7, 1, 1
                     size_hint_y: None
+                    disabled: True
                     height: 50
 
                 Button:
-                    text: 'Resume'
+                    text: t('resume')
                     id: resume
                     background_color: 0.5, 0.7, 1, 1
                     size_hint_y: None
+                    disabled: True
                     height: 50

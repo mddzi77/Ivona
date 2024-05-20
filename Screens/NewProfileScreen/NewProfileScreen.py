@@ -1,26 +1,20 @@
 import threading
-import time
 
 from kivy.clock import Clock
 from kivy.core.window import Window
-from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
-from kivy.uix.modalview import ModalView
-from kivy.uix.widget import Widget
-from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
 import json
 
 from PredefinedPopups.popup import TextPopup, OkPopup
-from Screens.MainScreen.FileRead import get_file_name
-from multiprocessing import Process
+from FileRead.file_read import get_file_name
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ListProperty
 from kivy.uix.button import Button
 from kivy.uix.scrollview import ScrollView
 from TextToSpeech.tts_handler import TTSHandler
-from kivy.uix.popup import Popup
+from Localization.localization import t
 
 Builder.load_file('Screens/NewProfileScreen/NewProfileScreenLayout.kv')
 
@@ -28,9 +22,13 @@ Builder.load_file('Screens/NewProfileScreen/NewProfileScreenLayout.kv')
 class NewProfileScreen(Screen):
     def __init__(self, **kwargs):
         super(NewProfileScreen, self).__init__(**kwargs)
-        self.popup = TextPopup('Creating profile', 'Loading')
+        # Window.bind(on_drop_file=self.on_file_drop)
+        self.popup = TextPopup(t('creating_profile'), t('loading'))
         self.refresh_event = None
         self.refresh_tick = 0
+
+    # def on_file_drop(self, window, file_path, x, y):
+    #     print('handling drop')
 
     def add_profile(self, profile_name):
         self.popup.show()
@@ -38,7 +36,7 @@ class NewProfileScreen(Screen):
         threading.Thread(target=self.__clone_thread, args=(profile_name,)).start()
 
     def __popup_refresher(self):
-        self.popup.set_text(Label(text=f"Creating profile{self.refresh_tick * '.'}"))
+        self.popup.set_text(Label(text=t('creating_profile') + self.refresh_tick * '.'))
         self.refresh_tick += 1
         if self.refresh_tick > 3:
             self.refresh_tick = 0
@@ -53,7 +51,7 @@ class NewProfileScreen(Screen):
     def __cloning_finished(self):
         Clock.unschedule(self.refresh_event)
         self.popup.dismiss()
-        self.popup = OkPopup(lambda dt: self.__loading_popup_ok(), 'Ok', 'Profile created')
+        self.popup = OkPopup(lambda dt: self.__loading_popup_ok(), 'Ok', t('profile_created'))
         self.popup.set_button_size(size_hint=(.2, .5))
         self.popup.show()
         self.manager.get_screen('-main_screen-').ids.profiles_dropdown.refresh_list()
@@ -72,14 +70,14 @@ class NewProfileScreen(Screen):
         }
 
         try:
-            with open("Assets/profiles.json", "r") as f:
+            with open("Assets/settings.json", "r") as f:
                 existing_data = json.load(f)
         except FileNotFoundError:
             existing_data = []
 
-        existing_data.append(new_data)
+        existing_data['profiles'].append(new_data)
 
-        with open("Assets/profiles.json", "w") as f:
+        with open("Assets/settings.json", "w") as f:
             json.dump(existing_data, f, indent=2)
 
 
