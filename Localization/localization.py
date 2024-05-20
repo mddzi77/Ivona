@@ -30,6 +30,7 @@ class Localization:
             return self.__data[key]
         except KeyError:
             print(f'Key {key} not found in translation file')
+            return f'key <{key}> not found'
 
     def set_lang(self, lang: Language):
         self.__language = self.__lang_dict[lang]

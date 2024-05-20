@@ -14,7 +14,8 @@ from FileRead.file_read import handle_dropfile
 from kivy.metrics import dp
 import json
 
-from texttospeech.tts_handler import TTSHandler
+from TextToSpeech.tts_handler import TTSHandler
+from Localization.localization import t
 
 Builder.load_file('Screens/MainScreen/MainScreenLayout.kv')
 
@@ -24,7 +25,7 @@ class MainScreen(Screen):
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
         Window.bind(on_drop_file=self.on_file_drop)
-        self.popup = TextPopup('Generating', 'Loading')
+        self.popup = TextPopup(t('generating'), t('loading'))
         self.refresh_event = None
         self.refresh_tick = 0
 
@@ -45,7 +46,7 @@ class MainScreen(Screen):
 
     def generate_audio(self):
         if self.ids.text_input.text == "":
-            print("No text to generate")
+            print(t('no_text_to_gen'))
             return
         self.popup.show()
         self.refresh_event = Clock.schedule_interval(lambda dt: self.__popup_refresher(), 0.3)
@@ -64,7 +65,7 @@ class MainScreen(Screen):
         Clock.unschedule(self.refresh_event)
 
     def __popup_refresher(self):
-        self.popup.set_text(Label(text=f"Generating{self.refresh_tick * '.'}"))
+        self.popup.set_text(Label(text=t('generating') + (self.refresh_tick * '.')))
         self.refresh_tick += 1
         if self.refresh_tick > 3:
             self.refresh_tick = 0
@@ -75,7 +76,7 @@ class ProfilesDropDown(Spinner):
 
     def __init__(self, **kwargs):
         super(ProfilesDropDown, self).__init__(**kwargs)
-        self.text = "Select Profile"
+        self.text = t('select_profile')
         self.dropdown_cls.max_height = 3 * dp(48)
         self.refresh_list()
 
@@ -89,8 +90,8 @@ class ProfilesDropDown(Spinner):
         self.profiles.clear()
         try:
             with open("Assets/settings.json", "r") as f:
-                existing_data = json.load(f)
-                for profile in existing_data:
+                profiles = json.load(f)['profiles']
+                for profile in profiles:
                     self.profiles.append(profile["ProfileName"])
         except FileNotFoundError as e:
             print(e)
