@@ -1,4 +1,10 @@
 {
   "language": "polish",
-  "profiles": []
+  "profiles": [
+    {
+      "ProfileName": "maks",
+      "Path": "E:/Dokumenty i prace/Studia/ProjektGrupowy/Recordings/rec4.mp3",
+      "VoiceID": "Jtcz7Yv44cDSVdoPRH1v"
+    }
+  ]
 }

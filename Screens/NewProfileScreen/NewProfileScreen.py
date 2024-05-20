@@ -1,6 +1,7 @@
 import threading
 
 from kivy.clock import Clock
+from kivy.core.window import Window
 from kivy.uix.label import Label
 from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
@@ -21,9 +22,13 @@ Builder.load_file('Screens/NewProfileScreen/NewProfileScreenLayout.kv')
 class NewProfileScreen(Screen):
     def __init__(self, **kwargs):
         super(NewProfileScreen, self).__init__(**kwargs)
+        # Window.bind(on_drop_file=self.on_file_drop)
         self.popup = TextPopup(t('creating_profile'), t('loading'))
         self.refresh_event = None
         self.refresh_tick = 0
+
+    # def on_file_drop(self, window, file_path, x, y):
+    #     print('handling drop')
 
     def add_profile(self, profile_name):
         self.popup.show()
