@@ -23,9 +23,12 @@
             size_hint_y: .3
             multiline: False
 
-		Label:
-			id: status_label
-			text: t('drag_recording_here')
+        BoxLayout:
+            orientation: 'horizontal'
+            id: drop_field
+            Label:
+                id: status_label
+                text: t('drag_recording_here')
         #ListBox:
         #	id: list_box #list_box.refresh(new_profile_text_input.text)
 

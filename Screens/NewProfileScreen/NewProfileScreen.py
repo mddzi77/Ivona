@@ -1,14 +1,15 @@
+import os
 import threading
 
 from kivy.clock import Clock
 from kivy.core.window import Window
+from kivy.graphics import Color
 from kivy.uix.label import Label
 from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
 import json
 
 from PredefinedPopups.popup import TextPopup, OkPopup
-from FileRead.file_read import get_file_name
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ListProperty
 from kivy.uix.button import Button
@@ -22,13 +23,23 @@ Builder.load_file('Screens/NewProfileScreen/NewProfileScreenLayout.kv')
 class NewProfileScreen(Screen):
     def __init__(self, **kwargs):
         super(NewProfileScreen, self).__init__(**kwargs)
-        # Window.bind(on_drop_file=self.on_file_drop)
+        Window.bind(on_drop_file=self.handle_dropfile)
         self.popup = TextPopup(t('creating_profile'), t('loading'))
         self.refresh_event = None
         self.refresh_tick = 0
+        self.file_name = ''
 
-    # def on_file_drop(self, window, file_path, x, y):
-    #     print('handling drop')
+    def handle_dropfile(self, window: Window, file_path, x, y):
+        file_extension = os.path.splitext(file_path.decode('utf-8'))[1]
+
+        if not self.ids.drop_field.collide_point(*window.mouse_pos):
+            return
+
+        if file_extension == '.wav' or file_extension == '.mp3':
+            self.file_name = file_path.decode('utf-8').replace('\\', '/')
+            self.ids.status_label.text = self.file_name
+
+        Window.raise_window()
 
     def add_profile(self, profile_name):
         self.popup.show()
@@ -42,10 +53,9 @@ class NewProfileScreen(Screen):
             self.refresh_tick = 0
 
     def __clone_thread(self, profile_name):
-        file_name = get_file_name()
-        TTSHandler.set_recordings([file_name])
+        TTSHandler.set_recordings([self.file_name])
         voice = TTSHandler.clone(profile_name)
-        self.__pass_to_json(profile_name, file_name, voice.voice_id)
+        self.__pass_to_json(profile_name, self.file_name, voice.voice_id)
         Clock.schedule_once(lambda dt: self.__cloning_finished())
 
     def __cloning_finished(self):
