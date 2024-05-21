@@ -32,10 +32,6 @@ class MainScreen(Screen):
         self.profile_selected = False
         self.audio_generated = False
 
-    def on_file_drop(self, window, file_path, x, y):
-        pass
-        #handle_dropfile(window, file_path, self.ids.text_input)
-
     def handle_dropfile(self, window: Window, file_path, x, y):
         file_extension = os.path.splitext(file_path.decode('utf-8'))[1]
 
