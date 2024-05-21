@@ -1,27 +1,43 @@
+import json
+
 from .tts_Interface import TextToSpeechInterface
 from TextToSpeech.ElevenLabs.eleven_labs import ElevenLabs
 from enum import Enum
 
 
 class ModelType(Enum):
-    Default = 0
-    ElevenLabs = 1
+    Default = 'built_in_model'
+    ElevenLabs = 'eleven_labs_model'
 
 
 class TTSHandler:
 
     __model: TextToSpeechInterface = None
+    __model_type: ModelType = None
     __eleven_labs = ElevenLabs()
     __default = None
 
     @staticmethod
+    def get_model_type():
+        return TTSHandler.__model_type.value
+
+    @staticmethod
     def set_model(model_type: ModelType):
         if model_type == ModelType.Default:
-            raise NotImplementedError('Model not implemented')  # TODO: Implement free default __model
+            TTSHandler.__model = TTSHandler.__default
+            TTSHandler.__model_type = ModelType.Default
+            # raise NotImplementedError('Model not implemented') TODO: Implement free default __model
         elif model_type == ModelType.ElevenLabs:
             TTSHandler.__model = TTSHandler.__eleven_labs
+            TTSHandler.__model_type = ModelType.ElevenLabs
         else:
             raise Exception('Invalid __model type')
+
+        with open('Assets/settings.json', 'r', encoding='UTF-8') as f:
+            data = json.load(f)
+            data['model'] = TTSHandler.__model_type.value
+        with open('Assets/settings.json', 'w') as f:
+            json.dump(data, f, indent=2)
 
     @staticmethod
     def set_recordings(recordings: list):

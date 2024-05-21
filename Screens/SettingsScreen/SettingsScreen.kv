@@ -1,0 +1,40 @@
+#: import t Localization.localization.t
+<SettingsScreen>:
+    cols: 1
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 25
+        padding: 10
+
+        Label:
+            text: 'Settings'
+            font_size: 30
+            size_hint_y: None
+            height: 50
+
+        BoxLayout:
+            id: options
+            orientation: 'vertical'
+            spacing: 20
+            padding: 20
+
+
+        Button:
+            id: apply_button
+            text: t('apply')
+            size_hint_y: None
+            height: 50
+            on_release:
+                root.apply_settings()
+                app.root.transition.direction = 'left'
+                app.root.current = '-main_screen-'
+
+        Button:
+            id: cancel_button
+            text: t('cancel')
+            size_hint_y: None
+            height: 50
+			on_release:
+				app.root.transition.direction = 'left'
+				app.root.current = '-main_screen-'

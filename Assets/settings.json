@@ -1,5 +1,6 @@
 {
   "language": "polish",
+  "model": "built_in_model",
   "profiles": [
     {
       "ProfileName": "maks",

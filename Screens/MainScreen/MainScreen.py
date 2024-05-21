@@ -9,7 +9,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.spinner import Spinner
 from kivy.properties import ListProperty
 
-from PredefinedPopups.popup import TextPopup
+from CustomUI.popup import TextPopup
 from FileRead.file_read import read_pdf
 
 from kivy.metrics import dp

@@ -6,8 +6,8 @@
 		# BoxLayout for Buttons - LEFT
 		BoxLayout:
 			orientation: 'vertical'
-			spacing: 90
-			padding: 15
+			spacing: 50
+			padding: 20
 
 			Label:
 				text: 'Ivona'
@@ -32,6 +32,15 @@
 			# SPACER
 			Label:
 				text: ''
+
+            Button:
+                text: t('settings')
+                id: settings
+                size_hint_y: None
+                height: 50
+                on_release:
+                    app.root.transition.direction = 'right'
+                    app.root.current = '-settings_screen-'
 
 #			Button:
 #				text: 'Profile'

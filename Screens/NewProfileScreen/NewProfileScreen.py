@@ -9,7 +9,7 @@ from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
 import json
 
-from PredefinedPopups.popup import TextPopup, OkPopup
+from CustomUI.popup import TextPopup, OkPopup
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ListProperty
 from kivy.uix.button import Button
