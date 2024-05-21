@@ -4,12 +4,12 @@ from enum import Enum
 
 
 def t(key):
-    return Localization().t(key)
+    return Localization().translate(key)
 
 
 class Language(Enum):
-    English = 0
-    Polish = 1
+    English = 'english'
+    Polish = 'polish'
 
 
 class Localization:
@@ -25,26 +25,40 @@ class Localization:
             cls.__instance.__initialize()
         return cls.__instance
 
-    def t(self, key):
+    def get_language(self):
+        return self.__language
+
+    def translate(self, key):
         try:
             return self.__data[key]
         except KeyError:
             print(f'Key {key} not found in translation file')
             return f'key <{key}> not found'
 
-    def set_lang(self, lang: Language):
-        self.__language = self.__lang_dict[lang]
+    def set_language(self, lang: Language):
+        self.__language = lang.value
         self.__write_lang()
         self.__load_data()
 
+    # def find_key(self, text):
+    #     with open('Assets/translation.csv', mode='r', encoding='UTF-8') as f:
+    #         reader = csv.DictReader(f)
+    #         for row in reader:
+    #             for lang in Language:
+    #                 try:
+    #                     if row[lang.value] == text:
+    #                         return row['key']
+    #                 except KeyError:
+    #                     pass
+
     def __initialize(self):
-        with open('Assets/settings.json', 'r') as f:
+        with open('Assets/settings.json', 'r', encoding='UTF-8') as f:
             data = json.load(f)
             self.__language = data['language']
             self.__load_data()
 
     def __write_lang(self):
-        with open('Assets/settings.json', 'r') as f:
+        with open('Assets/settings.json', 'r', encoding='UTF-8') as f:
             data = json.load(f)
             data['language'] = self.__language
         with open('Assets/settings.json', 'w') as f:

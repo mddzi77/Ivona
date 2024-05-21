@@ -16,3 +16,11 @@ drag_recording_here,Drag a recording here,Przeciągnij nagranie tutaj
 cancel,Cancel,Anuluj
 add,Add,Dodaj
 no_profile_selected,No profile selected,Nie wybrano profilu
+apply,Apply,Zastosuj
+language,Language,Język
+english,English,Angielski
+polish,Polish,Polski
+model,Model,Model
+built_in_model,Built-in (default),Wbudowany (domyślny)
+eleven_labs_model,ElevenLabs (paid),ElevenLabs (płatny)
+settings,Settings,Ustawienia

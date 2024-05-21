@@ -1,3 +1,4 @@
+import os
 import threading
 
 from kivy.clock import Clock
@@ -8,8 +9,8 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.spinner import Spinner
 from kivy.properties import ListProperty
 
-from PredefinedPopups.popup import TextPopup
-from FileRead.file_read import handle_dropfile
+from CustomUI.popup import TextPopup
+from FileRead.file_read import read_pdf
 
 from kivy.metrics import dp
 import json
@@ -24,15 +25,28 @@ class MainScreen(Screen):
 
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
-        Window.bind(on_drop_file=self.on_file_drop)
+        Window.bind(on_drop_file=self.handle_dropfile)
         self.popup = TextPopup(t('generating'), t('loading'))
         self.refresh_event = None
         self.refresh_tick = 0
         self.profile_selected = False
         self.audio_generated = False
 
-    def on_file_drop(self, window, file_path, x, y):
-        handle_dropfile(window, file_path, self.ids.text_input)
+    def handle_dropfile(self, window: Window, file_path, x, y):
+        file_extension = os.path.splitext(file_path.decode('utf-8'))[1]
+
+        if file_extension == '.wav' or file_extension == '.mp3':
+            global file_name
+            file_name = file_path.decode('utf-8').replace('\\', '/')
+            return
+
+        try:
+            if self.ids.text_input.collide_point(*window.mouse_pos):
+                read_pdf(file_path, self.ids.text_input)
+        except Exception as e:
+            self.ids.text_input.text = f"Error: {str(e)}"
+
+        Window.raise_window()
 
     def select_voice(self, voice_name):
         try:
