@@ -48,12 +48,12 @@ class TTSHandler:
         TTSHandler.__model.set_text(text)
 
     @staticmethod
-    def set_voice(voice_id):
-        TTSHandler.__model.set_voice(voice_id)
+    def set_voice(voice_name):
+        TTSHandler.__model.set_voice(voice_name)
 
     @staticmethod
     def clone(name: str, description=None):
-        return TTSHandler.__model.clone(name, description)
+        TTSHandler.__model.clone(name, description)
 
     @staticmethod
     def generate():
