@@ -1,16 +1,5 @@
 {
-  "language": "polish",
-  "model": "built_in_model",
-  "profiles": [
-    {
-      "ProfileName": "maks",
-      "Path": "E:/Dokumenty i prace/Studia/ProjektGrupowy/Recordings/rec4.mp3",
-      "VoiceID": "Jtcz7Yv44cDSVdoPRH1v"
-    },
-    {
-      "ProfileName": "maks2",
-      "Path": "E:/Dokumenty i prace/Studia/ProjektGrupowy/Recordings/rec4.mp3",
-      "VoiceID": "63MmCP15t2IIn3Omd2Tb"
-    }
-  ]
+  "language": "english",
+  "model": "eleven_labs_model",
+  "profiles": []
 }

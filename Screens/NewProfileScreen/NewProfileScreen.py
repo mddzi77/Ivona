@@ -28,6 +28,7 @@ class NewProfileScreen(Screen):
         self.refresh_event = None
         self.refresh_tick = 0
         self.file_name = ''
+        self.__err_msg = ''
 
     def handle_dropfile(self, window: Window, file_path, x, y):
         file_extension = os.path.splitext(file_path.decode('utf-8'))[1]
@@ -53,10 +54,21 @@ class NewProfileScreen(Screen):
             self.refresh_tick = 0
 
     def __clone_thread(self, profile_name):
-        TTSHandler.set_recordings([self.file_name])
-        voice = TTSHandler.clone(profile_name)
-        self.__pass_to_json(profile_name, self.file_name, voice.voice_id)
-        Clock.schedule_once(lambda dt: self.__cloning_finished())
+        try:
+            TTSHandler.set_recordings([self.file_name])
+            voice = TTSHandler.clone(profile_name)
+            self.__pass_to_json(profile_name, self.file_name, voice.voice_id)
+            Clock.schedule_once(lambda dt: self.__cloning_finished())
+        except Exception as err:
+            Clock.unschedule(self.refresh_event)
+            self.__err_msg = err
+            Clock.schedule_once(lambda dt: self.__throw_error())
+
+    def __throw_error(self):
+        self.popup.dismiss()
+        self.popup = OkPopup(lambda dt: self.__loading_popup_ok(), 'Ok', str(self.__err_msg))
+        self.popup.show()
+        print(self.__err_msg)
 
     def __cloning_finished(self):
         Clock.unschedule(self.refresh_event)
