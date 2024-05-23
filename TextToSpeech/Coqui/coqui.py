@@ -1,6 +1,7 @@
 from turtledemo.minimal_hanoi import play
 import torch
 from TTS.api import TTS
+from elevenlabs import play
 
 from TextToSpeech.tts_Interface import TextToSpeechInterface
 
@@ -22,6 +23,9 @@ class Coqui(TextToSpeechInterface):
         self.__speaker_wav = recordings
 
     def clone(self, name: str, description=None):
+        pass
+
+    def set_voice(self, voice_name):
         pass
 
     def generate(self):

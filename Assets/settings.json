@@ -1,6 +1,6 @@
 {
   "language": "polish",
-  "model": "eleven_labs_model",
+  "model": "built_in_model",
   "profiles": [
     {
       "ProfileName": "asdfasdf",
