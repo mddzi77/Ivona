@@ -12,6 +12,10 @@ class TextToSpeechInterface(ABC):
         pass
 
     @abstractmethod
+    def set_voice(self, voice_name):
+        pass
+
+    @abstractmethod
     def clone(self, name: str, description=None):
         pass
 

@@ -52,11 +52,7 @@ class MainScreen(Screen):
         try:
             with open("Assets/settings.json", "r") as f:
                 profiles = json.load(f)['profiles']
-                voice_id = ''
-                for profile in profiles:
-                    if profile["ProfileName"] == voice_name:
-                        voice_id = profile["VoiceID"]
-                TTSHandler.set_voice(voice_id)
+                TTSHandler.set_voice(voice_name)
                 self.profile_selected = True
         except FileNotFoundError as e:
             print(e)

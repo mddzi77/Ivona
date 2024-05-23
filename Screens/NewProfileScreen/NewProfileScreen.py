@@ -56,8 +56,8 @@ class NewProfileScreen(Screen):
     def __clone_thread(self, profile_name):
         try:
             TTSHandler.set_recordings([self.file_name])
-            voice = TTSHandler.clone(profile_name)
-            self.__pass_to_json(profile_name, self.file_name, voice.voice_id)
+            TTSHandler.clone(profile_name)
+            self.__pass_to_json(profile_name, self.file_name)
             Clock.schedule_once(lambda dt: self.__cloning_finished())
         except Exception as err:
             Clock.unschedule(self.refresh_event)
@@ -83,12 +83,11 @@ class NewProfileScreen(Screen):
         self.manager.current = '-main_screen-'
         self.popup.dismiss()
 
-    def __pass_to_json(self, profile_name, file_name, voice_id):
+    def __pass_to_json(self, profile_name, file_name):
 
         new_data = {
             "ProfileName": profile_name,
-            "Path": file_name,
-            "VoiceID": voice_id
+            "Path": file_name
         }
 
         try:

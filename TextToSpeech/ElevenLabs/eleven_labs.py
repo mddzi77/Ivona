@@ -1,4 +1,4 @@
-from elevenlabs import generate, clone, play, Voice, set_api_key
+from elevenlabs import generate, clone, play, Voice, set_api_key, Voices
 from TextToSpeech.tts_Interface import TextToSpeechInterface
 
 
@@ -21,7 +21,15 @@ class ElevenLabs(TextToSpeechInterface):
     def set_recordings(self, recordings: list):
         self.__recordings = recordings
 
-    def set_voice(self, voice_id):
+    def set_voice(self, voice_name):
+        voice_id = ''
+        voices = Voices.from_api(self.__api_key)
+        for v in voices:
+            if v.category == 'premade':
+                pass
+            elif v.name == voice_name:
+                voice_id = v.voice_id
+                break
         self.__voice = Voice(voice_id=voice_id, api_key=self.__api_key)
 
     def clone(self, name: str, description=None):
