@@ -26,3 +26,7 @@ class TextToSpeechInterface(ABC):
     @abstractmethod
     def play(self):
         pass
+
+    @abstractmethod
+    def save(self, path: str):
+        pass

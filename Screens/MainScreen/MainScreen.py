@@ -4,11 +4,14 @@ import threading
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.lang import Builder
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.filechooser import FileChooserListView
 from kivy.uix.label import Label
+from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
 from kivy.uix.spinner import Spinner
 from kivy.properties import ListProperty
-
+from kivy.uix.button import Button
 from CustomUI.popup import TextPopup
 from CustomUI.popup import OkPopup
 from FileRead.file_read import read_pdf
@@ -18,7 +21,7 @@ import json
 
 from TextToSpeech.tts_handler import TTSHandler
 from Localization.localization import t
-
+from PathChooser.FileChooserPopup import FileChooserPopup
 Builder.load_file('Screens/MainScreen/MainScreenLayout.kv')
 
 
@@ -32,6 +35,7 @@ class MainScreen(Screen):
         self.refresh_tick = 0
         self.profile_selected = False
         self.audio_generated = False
+        self.selected_path = None
         self.popup_inf = OkPopup(lambda dt: self.__loading_popup_ok(), 'Ok', t('info'))
         self.i = True
 
@@ -91,6 +95,19 @@ class MainScreen(Screen):
         except Exception as e:
             print(e)
 
+    def save_file(self):
+        file_chooser_popup = FileChooserPopup(callback=self.finalize_save)
+        file_chooser_popup.open()
+
+    def finalize_save(self, path):
+        self.selected_path = path
+        if self.selected_path:
+            try:
+                TTSHandler.save(self.selected_path)
+                print(f'File saved to {self.selected_path}')
+            except Exception as e:
+                print(e)
+
     def __generate_thread(self):
         TTSHandler.set_text(self.ids.text_input.text)
         TTSHandler.generate()
@@ -102,6 +119,7 @@ class MainScreen(Screen):
     def __unlock_buttons(self):
         self.ids.stop.disabled = False
         self.ids.resume.disabled = False
+        self.ids.save.disabled = False
         self.ids.generate_play.text = t('play')
         self.ids.generate_play.background_color = (0.5, 0.7, 1, 1)
 

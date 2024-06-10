@@ -1,4 +1,6 @@
-from elevenlabs import generate, clone, play, Voice, set_api_key, Voices
+import uuid
+
+from elevenlabs import generate, clone, play, Voice, set_api_key, Voices, save
 from TextToSpeech.tts_Interface import TextToSpeechInterface
 
 
@@ -48,3 +50,13 @@ class ElevenLabs(TextToSpeechInterface):
         elif self.audio is None:
             raise Exception('Audio not generated')
         play(self.audio, use_ffmpeg=False)
+
+    def save(self, path):
+        if self.__voice is None:
+            raise Exception('Voice not set')
+        elif self.audio is None:
+            raise Exception('Audio not generated')
+        save_file_path = f"{path}\\{uuid.uuid4()}.mp3"          #tu eventualnie zamiast uuid to dać nazwe uzytkownika do wyboru
+        with open(save_file_path, "wb") as f:
+            f.write(self.audio)
+        print(f"{save_file_path}: plik audio zapisany")

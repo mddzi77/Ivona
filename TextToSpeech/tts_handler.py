@@ -62,3 +62,7 @@ class TTSHandler:
     @staticmethod
     def play():
         TTSHandler.__model.play()
+
+    @staticmethod
+    def save(path: str):
+        TTSHandler.__model.save(path)
