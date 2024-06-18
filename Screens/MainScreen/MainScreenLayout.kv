@@ -19,8 +19,10 @@
 				size_hint_y: None
 				height: 50
 				on_release:
+				    app.root.current = '-new_profile_screen-'
+				    root.throw_information()
 					app.root.transition.direction = 'left'
-					app.root.current = '-new_profile_screen-'
+
 
 			ProfilesDropDown:
 				id: profiles_dropdown

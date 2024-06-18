@@ -24,3 +24,4 @@ model,Model,Model
 built_in_model,Built-in (default),Wbudowany (domyślny)
 eleven_labs_model,ElevenLabs (paid),ElevenLabs (płatny)
 settings,Settings,Ustawienia
+info,In order for the application to work properly it is necessary to place an oddball file with a minimum length of 30 seconds, Aby aplikacja działała poprawnie należy umieścić plik dziwiękowy o minimalnej długości 30-stu sekund

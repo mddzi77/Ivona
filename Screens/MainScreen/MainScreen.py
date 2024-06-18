@@ -10,6 +10,7 @@ from kivy.uix.spinner import Spinner
 from kivy.properties import ListProperty
 
 from CustomUI.popup import TextPopup
+from CustomUI.popup import OkPopup
 from FileRead.file_read import read_pdf
 
 from kivy.metrics import dp
@@ -31,6 +32,8 @@ class MainScreen(Screen):
         self.refresh_tick = 0
         self.profile_selected = False
         self.audio_generated = False
+        self.popup_inf = OkPopup(lambda dt: self.__loading_popup_ok(), 'Ok', t('info'))
+        self.i = True
 
     def handle_dropfile(self, window: Window, file_path, x, y):
         file_extension = os.path.splitext(file_path.decode('utf-8'))[1]
@@ -47,6 +50,15 @@ class MainScreen(Screen):
             self.ids.text_input.text = f"Error: {str(e)}"
 
         Window.raise_window()
+
+    def __loading_popup_ok(self):
+        self.popup_inf.dismiss()
+
+    def throw_information(self):
+        if self.i:
+            self.popup_inf.show()
+            self.i = False
+
 
     def select_voice(self, voice_name):
         try:
