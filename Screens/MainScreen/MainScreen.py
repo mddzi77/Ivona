@@ -59,7 +59,6 @@ class MainScreen(Screen):
             self.popup_inf.show()
             self.i = False
 
-
     def select_voice(self, voice_name):
         try:
             with open("Assets/settings.json", "r") as f:
