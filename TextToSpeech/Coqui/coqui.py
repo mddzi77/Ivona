@@ -52,3 +52,6 @@ class Coqui(TextToSpeechInterface):
 
     def set_text(self, text: str):
         self.__text = text
+
+    def save(self, path: str):
+        pass

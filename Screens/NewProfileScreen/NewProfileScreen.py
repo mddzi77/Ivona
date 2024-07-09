@@ -43,6 +43,11 @@ class NewProfileScreen(Screen):
         Window.raise_window()
 
     def add_profile(self, profile_name):
+        if profile_name is None or profile_name == '' or self.file_name is None or self.file_name == '':
+            self.popup = OkPopup(lambda dt: self.__no_data_popup_ok(), title=t('no_profile_data'))
+            self.popup.show()
+            return
+        self.popup = TextPopup(t('creating_profile'), t('loading'))
         self.popup.show()
         self.refresh_event = Clock.schedule_interval(lambda dt: self.__popup_refresher(), 0.3)
         threading.Thread(target=self.__clone_thread, args=(profile_name,)).start()
@@ -81,6 +86,9 @@ class NewProfileScreen(Screen):
     def __loading_popup_ok(self):
         self.manager.transition.direction = 'right'
         self.manager.current = '-main_screen-'
+        self.popup.dismiss()
+
+    def __no_data_popup_ok(self):
         self.popup.dismiss()
 
     def __pass_to_json(self, profile_name, file_name):

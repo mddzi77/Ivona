@@ -1,6 +1,5 @@
 {
   "language": "polish",
-  "model": "eleven_labs_model",
-  "profiles": [
-  ]
+  "model": "built_in_model",
+  "profiles": []
 }
