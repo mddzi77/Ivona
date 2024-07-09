@@ -48,3 +48,9 @@ class ElevenLabs(TextToSpeechInterface):
         elif self.audio is None:
             raise Exception('Audio not generated')
         play(self.audio, use_ffmpeg=False)
+
+    def stop(self):
+        pass
+
+    def resume(self):
+        pass

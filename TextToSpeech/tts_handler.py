@@ -14,9 +14,9 @@ class ModelType(Enum):
 class TTSHandler:
 
     __model: TextToSpeechInterface = None
-    __model_type: ModelType = Coqui()
+    __model_type: ModelType = None
     __eleven_labs = ElevenLabs()
-    __default = None
+    __default = Coqui()
 
     @staticmethod
     def get_model_type():
@@ -63,3 +63,11 @@ class TTSHandler:
     @staticmethod
     def play():
         TTSHandler.__model.play()
+
+    @staticmethod
+    def stop():
+        TTSHandler.__model.stop()
+
+    @staticmethod
+    def resume():
+        TTSHandler.__model.resume()

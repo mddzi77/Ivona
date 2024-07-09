@@ -80,6 +80,17 @@ class MainScreen(Screen):
         except Exception as e:
             print(e)
 
+    def stop_audio(self):
+        try:
+            TTSHandler.stop()
+        except Exception as e:
+            print(e)
+    def resume_audio(self):
+        try:
+            TTSHandler.resume()
+        except Exception as e:
+            print(e)
+
     def __generate_thread(self):
         TTSHandler.set_text(self.ids.text_input.text)
         TTSHandler.generate()
