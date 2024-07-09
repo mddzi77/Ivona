@@ -108,6 +108,8 @@
                     size_hint_y: None
                     disabled: True
                     height: 50
+                    on_release:
+						root.stop_audio()
 
                 Button:
                     text: t('resume')
@@ -116,6 +118,8 @@
                     size_hint_y: None
                     disabled: True
                     height: 50
+                    on_release:
+						root.resume_audio()
 
                 Button:
                     id: save

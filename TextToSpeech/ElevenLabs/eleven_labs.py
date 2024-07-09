@@ -1,5 +1,4 @@
 import uuid
-
 from elevenlabs import generate, clone, play, Voice, set_api_key, Voices, save
 from TextToSpeech.tts_Interface import TextToSpeechInterface
 
@@ -60,3 +59,8 @@ class ElevenLabs(TextToSpeechInterface):
         with open(save_file_path, "wb") as f:
             f.write(self.audio)
         print(f"{save_file_path}: plik audio zapisany")
+    def stop(self):
+        pass
+
+    def resume(self):
+        pass

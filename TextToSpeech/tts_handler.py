@@ -1,5 +1,6 @@
 import json
 
+from .Coqui.coqui import Coqui
 from .tts_Interface import TextToSpeechInterface
 from TextToSpeech.ElevenLabs.eleven_labs import ElevenLabs
 from enum import Enum
@@ -15,7 +16,7 @@ class TTSHandler:
     __model: TextToSpeechInterface = None
     __model_type: ModelType = None
     __eleven_labs = ElevenLabs()
-    __default = None
+    __default = Coqui()
 
     @staticmethod
     def get_model_type():
@@ -66,3 +67,11 @@ class TTSHandler:
     @staticmethod
     def save(path: str):
         TTSHandler.__model.save(path)
+
+    @staticmethod
+    def stop():
+        TTSHandler.__model.stop()
+
+    @staticmethod
+    def resume():
+        TTSHandler.__model.resume()

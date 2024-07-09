@@ -30,3 +30,11 @@ class TextToSpeechInterface(ABC):
     @abstractmethod
     def save(self, path: str):
         pass
+
+    @abstractmethod
+    def stop(self):
+        pass
+
+    @abstractmethod
+    def resume(self):
+        pass
