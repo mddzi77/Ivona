@@ -3,3 +3,6 @@ elevenlabs==0.2.27
 PyMuPDF==1.23.15
 torch==2.3.1
 pygame==2.6.0
+sounddevice==0.4.7
+soundfile==0.12.1
+TTS==0.22.0

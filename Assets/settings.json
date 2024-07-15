@@ -1,5 +1,11 @@
 {
-  "language": "polish",
+  "language": "english",
   "model": "built_in_model",
-  "profiles": []
+  "profiles": [
+    {
+      "ProfileName": "test builtin",
+      "Path": "E:/Dokumenty i prace/Studia/ProjektGrupowy Reszta/Recordings/rec4.mp3",
+      "ModelType": "built_in_model"
+    }
+  ]
 }

@@ -1,3 +1,5 @@
+import json
+import uuid
 from turtledemo.minimal_hanoi import play
 import torch
 import pygame
@@ -11,12 +13,14 @@ class Coqui(TextToSpeechInterface):
     def __init__(self):
         self.__model = 'tts_models/multilingual/multi-dataset/xtts_v2'
         self.audio = None
+        self.audio_bytes = None
         self.__text: str = 'Siema jestem Marcin! Co tam?'
-        self.__file_path = 'Assets/output.wav'
+        self.__file_path = 'Assets/temp.wav'
         self.__language = 'pl'
+        self.__voice = None
         self.__split_sentences = True
         # self.voice = '' #nazwa profilu uzytkownika
-        self.__speaker_wav = "Assets/Voices/plik1.wav"
+        self.__speaker_wav = None
         self.__device = "cuda" if torch.cuda.is_available() else "cpu"
         self.__tts = TTS(model_name=self.__model, gpu=False)
         pygame.mixer.init()
@@ -28,7 +32,16 @@ class Coqui(TextToSpeechInterface):
         pass
 
     def set_voice(self, voice_name):
-        pass
+        try:
+            with open("Assets/settings.json", "r") as f:
+                profiles = json.load(f)['profiles']
+                for profile in profiles:
+                    if profile["ProfileName"] == voice_name:
+                        self.__speaker_wav = profile["Path"]
+                        self.__voice = voice_name
+                        break
+        except FileNotFoundError as e:
+            print(e)
 
     def generate(self):
         self.audio = self.__tts.tts_to_file(text=self.__text,
@@ -36,11 +49,14 @@ class Coqui(TextToSpeechInterface):
                                     language=self.__language,
                                     file_path=self.__file_path,
                                     split_sentences=self.__split_sentences)
+        with open(self.__file_path, 'rb') as f:
+            self.audio_bytes = f.read()
 
     def play(self):
-        # if self.audio is None:
-        #     raise Exception('Audio not generated')
-        # play(self.audio, use_ffmpeg=False)
+        if self.__voice is None:
+            raise Exception('Voice not set')
+        elif self.audio is None:
+            raise Exception('Audio not generated')
         pygame.mixer.music.load(self.__file_path)
         pygame.mixer.music.play()
 
@@ -54,4 +70,7 @@ class Coqui(TextToSpeechInterface):
         self.__text = text
 
     def save(self, path: str):
-        pass
+        save_file_path = f"{path}\\{uuid.uuid4()}.wav"
+        with open(save_file_path, "wb") as f:
+            f.write(self.audio_bytes)
+        print(f"{save_file_path}: plik audio zapisany")

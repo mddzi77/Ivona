@@ -55,10 +55,11 @@ class ElevenLabs(TextToSpeechInterface):
             raise Exception('Voice not set')
         elif self.audio is None:
             raise Exception('Audio not generated')
-        save_file_path = f"{path}\\{uuid.uuid4()}.mp3"          #tu eventualnie zamiast uuid to dać nazwe uzytkownika do wyboru
+        save_file_path = f"{path}\\{uuid.uuid4()}.mp3"
         with open(save_file_path, "wb") as f:
             f.write(self.audio)
         print(f"{save_file_path}: plik audio zapisany")
+
     def stop(self):
         pass
 

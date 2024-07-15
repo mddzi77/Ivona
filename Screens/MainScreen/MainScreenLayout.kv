@@ -28,6 +28,8 @@
 				id: profiles_dropdown
 				size_hint_y: None
 				height: 50
+				on_press:
+				    root.ids.profiles_dropdown.refresh_list()
 				on_text:
 					root.select_voice(self.text)
 

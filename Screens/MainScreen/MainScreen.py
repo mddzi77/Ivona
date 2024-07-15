@@ -37,6 +37,7 @@ class MainScreen(Screen):
         self.audio_generated = False
         self.selected_path = None
         self.popup_inf = OkPopup(lambda dt: self.__loading_popup_ok(), 'Ok', t('info'))
+        self.error_popup = OkPopup(lambda dt: self.__loading_popup_ok(), 'Ok', 'Error')
         self.i = True
 
     def handle_dropfile(self, window: Window, file_path, x, y):
@@ -80,10 +81,10 @@ class MainScreen(Screen):
 
     def generate_audio(self):
         if self.ids.text_input.text == "":
-            print(t('no_text_to_gen'))
+            self.error_popup = OkPopup(lambda x: self.error_popup.dismiss(), 'Ok', t('no_text_to_gen'))
             return
         elif not self.profile_selected:
-            print(t('no_profile_selected'))
+            self.error_popup = OkPopup(lambda x: self.error_popup.dismiss(), 'Ok', t('no_profile_selected'))
             return
         self.popup.show()
         self.refresh_event = Clock.schedule_interval(lambda dt: self.__popup_refresher(), 0.3)
@@ -162,6 +163,7 @@ class ProfilesDropDown(Spinner):
             with open("Assets/settings.json", "r") as f:
                 profiles = json.load(f)['profiles']
                 for profile in profiles:
-                    self.profiles.append(profile["ProfileName"])
+                    if profile["ModelType"] == TTSHandler.get_model_type():
+                        self.profiles.append(profile["ProfileName"])
         except FileNotFoundError as e:
             print(e)

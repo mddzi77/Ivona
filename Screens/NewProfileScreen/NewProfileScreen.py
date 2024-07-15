@@ -95,7 +95,8 @@ class NewProfileScreen(Screen):
 
         new_data = {
             "ProfileName": profile_name,
-            "Path": file_name
+            "Path": file_name,
+            "ModelType": TTSHandler.get_model_type()
         }
 
         try:
